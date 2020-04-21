@@ -1,0 +1,4 @@
+SELECT * FROM `JPD333`.`blabs`;
+SELECT * FROM `JPD333`.`users`;
+TRUNCATE `JPD333`.`blabs`;
+TRUNCATE `JPD333`.`users`;
