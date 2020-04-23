@@ -18,10 +18,12 @@ namespace BlabberApp.DataStoreTest
         {
             _email = "fooabar@example.com";
             _user = new User(_email);
+            RemoveAllBlabs();
         }
         [TestCleanup]
         public void TearDown()
         {
+            RemoveAllBlabs();
         }
 
         [TestMethod]
@@ -69,6 +71,18 @@ namespace BlabberApp.DataStoreTest
             int actual = blabs.Count;
             //Assert
             Assert.AreEqual(actual, expected);
+        }
+
+        private void RemoveAllBlabs()
+        {
+            ArrayList blabs = (ArrayList)_harness.GetAll();
+            if (blabs.Count > 0)
+            {
+                foreach (Blab blab in blabs)
+                {
+                    _harness.Remove(blab);
+                }
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BlabberApp.DataStoreTest
     public class UserAdapter_MySql_UnitTests
     {
         private User _user;
+        private int _usersCount;
         private UserAdapter _harness = new UserAdapter(new MySqlUser());
         private readonly string _email = "foobar@example.com";
 
@@ -18,11 +19,11 @@ namespace BlabberApp.DataStoreTest
         public void Setup()
         {
             _user = new User(_email);
+            _usersCount = ((ArrayList)_harness.GetAll()).Count;
         }
         [TestCleanup]
         public void TearDown()
         {
-            //User user = new User(_email);
             _harness.Remove(_user);
         }
 
@@ -53,7 +54,7 @@ namespace BlabberApp.DataStoreTest
             _harness.Add(_user);
             //Act
             ArrayList users = (ArrayList)_harness.GetAll();
-            User actual = (User)users[0];  
+            User actual = (User)users[_usersCount];  
 
             //Assert
             Assert.AreEqual(_user.Id.ToString(), actual.Id.ToString());
